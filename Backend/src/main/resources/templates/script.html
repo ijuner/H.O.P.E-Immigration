@@ -1,0 +1,18 @@
+<script type="text/javascript" src="/js/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    const RESP_SUCCESS_CODE = 0;
+    function showAlertDiv(show_text, jump_url) {
+        $('#alertdiv').html(show_text);  // set message to show
+        $('#alertdiv').show();  // show the message div
+        setTimeout(function () {  // count down
+            $('#alertdiv').html(''); // clear mesage content
+            $('#alertdiv').hide();  // hide the message div
+            if(jump_url) {
+                window.location.href = jump_url;
+            } else {
+                window.location.reload();
+            }
+        }, 1500);  // after 1.5 second
+    }
+</script>

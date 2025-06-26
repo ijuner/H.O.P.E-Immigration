@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Log View</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-datepicker.min.css" />
+</head>
+<body>
+<!-- nav part -->
+<div th:replace="common::head_column"/>
+<!-- main page -->
+<div class="row">
+    <div th:replace="common::left_column"/>
+    <div class="col-sm-10">
+        <div class="bread-crumb">
+            <ul class="breadcrumb">
+                <li><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;<a href="/">Home</a></li>
+                <li>Log View</li>
+            </ul>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <a class="panel-title">Log View</a>
+            </div>
+            <div class="panel-body">
+                <span th:if="${url} eq ''">All</span>
+                <span th:unless="${url} eq ''"><a href="/manage/account/log/list">All</a></span>
+                <span th:if="${url} eq 'admin/'">Admin log</span>
+                <span th:unless="${url} eq 'admin/'"><a href="/manage/account/log/list/admin">Admin log</a></span>
+                <span th:if="${url} eq 'api/'">Api log</span>
+                <span th:unless="${url} eq 'api/'"><a href="/manage/account/log/list/api">Api log</a></span>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover" id="cate_table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Account Name</th>
+                        <th>Action</th>
+                        <th>Previous</th>
+                        <th>Now</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="log, logStatus : ${list.content}">
+                        <th scope="row" th:text="${logStatus.count}">1</th>
+                        <td th:text="${log.account}">Account</td>
+                        <td th:text="${log.operation}">Action</td>
+                        <td th:text="${log.oldContent}">Previous</td>
+                        <td th:text="${log.newContent}">Now</td>
+                        <td th:text="${log.createTime}">Time</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel-body" style="margin:-5px 0">
+                <div class="col-sm-6 pull-left">
+                    &nbsp;<span th:text="${list.totalElements}"/>&nbsp;Records&nbsp;&nbsp;
+                    Page&nbsp;<span th:text="${list.getNumber()+1}"></span>/<span th:text="${list.getTotalPages()}">&nbsp;</span>
+                </div>
+            </div>
+
+            <div class="modal-footer no-margin-top">
+                <ul class="pagination nav navbar-nav navbar-left">
+                    <!-- First Page -->
+                    <li>
+                        <a th:href="'/manage/account/log/list' + ${url}">First Page</a>
+                    </li>
+                    <!-- Previous Page -->
+                    <li th:if="${list.hasPrevious()}">
+                        <a th:href="'/manage/account/log/list/' + ${url} + ${list.previousPageable().getPageNumber()+1}">Previous Page</a>
+                    </li>
+                    <!-- Next Page -->
+                    <li th:if="${list.hasNext()}">
+                        <a th:href="'/manage/account/log/list/' + ${url} + ${list.nextPageable().getPageNumber()+1}">Next Page</a>
+                    </li>
+                    <!-- last Page -->
+                    <li th:if="${list.getTotalPages()>1}">
+                        <a th:href="'/manage/account/log/list/' + ${url} + ${list.getTotalPages()}">Last Page</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="script"/>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#collapseZ").collapse();
+    });
+</script>
+</body>
+</html>

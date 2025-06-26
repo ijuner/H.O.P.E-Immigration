@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Role Bind</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-datepicker.min.css" />
+</head>
+<body>
+<!-- nav part -->
+<div th:replace="common::head_column"/>
+<!-- main page -->
+<div class="row">
+    <div th:replace="common::left_column"/>
+    <div class="col-sm-10">
+        <div class="bread-crumb">
+            <ul class="breadcrumb">
+                <li><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;<a href="/">Home</a></li>
+                <li>Account Management</li>
+                <li>Role Bind</li>
+            </ul>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <a class="panel-title">[<span th:text="${admin.username}"></span>] Role Bind</a>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover" id="cate_table">
+                    <input type="hidden" id="id" th:value="${admin.id}"/>
+                    <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Bind/Unbind</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="role, roleStatus : ${list}">
+                        <td th:text="${role.role_name}">neo</td>
+                        <td><input type="checkbox" th:onclick="toggleAdminRole([[${role.admin_id}]], [[${role.role_id}]])" th:checked="${role.contained}"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel-body">
+                <a href="/manage/account/role/list">Role Management</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common::alert_div"/>
+<script th:replace="script"/>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#collapseZ").collapse();
+    });
+
+    function toggleAdminRole(admin_id, role_id) {
+        $.post(role_id + "/bind", function(result){
+            if (result['code'] === RESP_SUCCESS_CODE) {
+                $('#alertdiv').html("success");
+                $('#alertdiv').show();
+                setTimeout(function () {
+                    $('#alertdiv').html('');
+                    $('#alertdiv').hide();
+                }, 600);
+            } else {
+                alert(result['msg']);
+            }
+        });
+    }
+</script>
+</body>
+</html>

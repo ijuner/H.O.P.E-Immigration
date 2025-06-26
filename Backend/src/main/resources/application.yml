@@ -1,0 +1,82 @@
+server:
+  tomcat:
+    basedir: .
+    uri-encoding: UTF-8
+    accesslog:
+      directory: logs/
+      enabled: true
+      prefix: access_log
+      pattern: "%t [%I] %{X-Forwarded-IP}i %a '%r'[body=%b][code=%s][cost=%D]"
+      suffix: .log
+    remote-ip-header: X-Real-IP
+    protocol-header: X-Forwarded-Proto
+    protocol-header-https-value: https
+    redirect-context-root: true
+  port: 8877
+  servlet:
+    session:
+      timeout: 10h
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+  forward-headers-strategy: native
+
+spring:
+  profiles:
+    active: test
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://ip:port/database
+    username: username
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      test-on-borrow: true
+      test-on-return: true
+      test-while-idle: true
+      validation-query: select 'x'
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      initial-size: 1
+      min-idle: 1
+      max-active: 50
+      stat-view-servlet:
+        login-username: admin
+        login-password: usLs*cgUpN
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        allow:
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 2000
+      filters: stat,wall,log4j2
+      aop-patterns: com.web.springbootdruid.service.*
+      web-stat-filter:
+        enabled: true
+        exclusions: "*.js,*.gif,*.jpg,*.jpeg,*.png,*.css,*.ico,/druid/*"
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: false
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+    thymeleaf:
+      cache: false
+    devtools:
+      restart:
+        enabled: true

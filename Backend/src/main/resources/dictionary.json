@@ -1,0 +1,66 @@
+{
+  "maritalStatus": [
+    {
+      "value": "A",
+      "name": "Annulled Marriag"
+    },
+    {
+      "value": "B",
+      "name": "Common-Law"
+    },
+    {
+      "value": "C",
+      "name": "Divorced / Separated"
+    },
+    {
+      "value": "D",
+      "name": "Legally Separated"
+    },
+    {
+      "value": "E",
+      "name": "Married"
+    },
+    {
+      "value": "F",
+      "name": "Never Married / Single"
+    },
+    {
+      "value": "G",
+      "name": "Widowed"
+    }
+  ],
+  "educationLevel": [
+    {
+      "value": "A",
+      "name": "None, or less than secondary (high school)"
+    },
+    {
+      "value": "B",
+      "name": "Secondary diploma (high school graduation)"
+    },
+    {
+      "value": "C",
+      "name": "One-year program at a university, college, trade or technical school, or other institute"
+    },
+    {
+      "value": "D",
+      "name": "Two-year program at a university, college, trade or technical school, or other institute"
+    },
+    {
+      "value": "E",
+      "name": "Bachelor's degree (three or more year program at a university, college, trade or technical school, or other institute)"
+    },
+    {
+      "value": "F",
+      "name": "Two or more certificates, diplomas or degrees. One must be for a program of three or more years"
+    },
+    {
+      "value": "G",
+      "name": "Master's degree, or professional degree needed to practice in a licensed profession (see Help)"
+    },
+    {
+      "value": "H",
+      "name": "Doctoral level university degree (PhD)"
+    }
+  ]
+}
