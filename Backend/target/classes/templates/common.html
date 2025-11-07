@@ -1,0 +1,43 @@
+<div th:fragment="head_column" class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <small class="glyphicon glyphicon-fire"></small>
+                <span>Hope Management</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="left_column" class="col-sm-2">
+    <div class="panel-group" id="box">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <a href="#collapseA" data-parent="#box" data-toggle="collapse" class="panel-title">Policy</a>
+            </div>
+            <div class="panel-collapse collapse" id="collapseA">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/manage/policy/list/1">Policy List</a></li>
+                        <li><a href="/manage/policy/record/1">Scrap Record</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <a href="#collapseZ" data-parent="#box" data-toggle="collapse" class="panel-title">System</a>
+            </div>
+            <div class="panel-collapse collapse" id="collapseZ">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="/manage/account/list">Admin Account</a></li>
+                        <!--li><a href="/manage/account/log/list">System Operation</a></li-->
+                        <li><a href="/manage/account/password/edit">Edit Password</a></li>
+                        <li><a th:href="@{/logout}">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="alert_div" id="alertdiv" style="position:fixed;top:60px;left:40%;right:40%;padding:20px 30px;background: rgba(0, 0, 0, 0.5);color:#ffff66;font-size:24px;text-align:center;z-index:999;display:none;"></div>
